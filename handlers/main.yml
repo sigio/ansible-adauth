@@ -1,6 +1,6 @@
 ---
 - name: restart samba
-  command: service smb restart
+  service: name=smb state=restarted
 
 - name: restart sssd
-  command: service sssd restart
+  service: name=sssd state=restarted
