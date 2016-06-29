@@ -3,4 +3,5 @@
 - include: 1_samba.yml
 - include: 2_kerberos.yml
 - include: 3_sssd.yml
+- include: 4_pammount.yml
 

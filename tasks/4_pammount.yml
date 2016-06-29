@@ -1,0 +1,35 @@
+---
+
+- name: Check if pam-mount is already installed
+  command: warn=no rpm -qa pam_mount
+  register: pam_mount_check
+  ignore_errors: yes
+  always_run: yes
+  tags:
+    - pam-mount
+    - yum
+
+- name: Install pam-mount
+  yum: pkg={{ item }} state=present
+  with_items:
+    - http://centos6.sigio.nl/x86_64/libHX-3.6-2.el6.x86_64.rpm
+    - http://centos6.sigio.nl/x86_64/pam_mount-2.5-2.el6.x86_64.rpm
+  when: '"pam_mount" not in pam_mount_check.stdout'
+  tags:
+    - pam-mount
+    - yum
+
+- name: Enable pam_mount in /etc/pam.d/system-auth
+  lineinfile: dest=/etc/pam.d/system-auth follow=yes line="{{item.line}}" state=present insertafter="{{item.after}}"
+  with_items:
+    - { line: "auth optional pam_mount.so", after: "^auth.*requisite.*pam_succeed_if.so" }
+    - { line: "session optional pam_mount.so", after: "^session.*optional.*pam_sss.so" }
+  tags:
+    - pam-mount
+    - system-auth
+    
+- name: Template pam_mount.conf.xml
+  template: src="pam_mount.conf.xml.j2" dest="/etc/security/pam_mount.conf.xml" owner=root group=root mode=0600
+  tags:
+    - pam-mount
+    - pam-mount.conf
