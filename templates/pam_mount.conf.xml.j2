@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE pam_mount SYSTEM "pam_mount.conf.xml.dtd">
+
+<!-- See pam_mount.conf(5) for a description.  -->
+
+<pam_mount>
+    <debug enable="0" />
+
+    <!-- <luserconf name=".pam_mount.conf.xml" /> -->
+
+    <mntoptions allow="nosuid,nodev,loop,encryption,fsck,nonempty,allow_root,allow_other" />
+    <mntoptions require="nosuid,nodev" />
+
+    <logout wait="5000" hup="0" term="0" kill="0" />
+
+    <mkmountpoint enable="1" remove="true" />
+
+    <volume user="*" fstype="cifs" server="{{adauth_fileserver}}" path="{{adauth_homepath}}" mountpoint="{{adauth_homemount}}" options="iocharset=utf8,file_mode=0700,dir_mode=0700,nodev,nosuid,sec=krb5,cruid=%(USERUID)" />
+
+</pam_mount>
