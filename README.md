@@ -5,6 +5,12 @@ Ansible role to configure RHEL and derivates to use Microsoft Active Directory f
 
 Tested on Centos 6.5 and Centos 7.0. After configuration it allows only local users and users matching the $adauth_access_filter to login. You should probabably see templates/sssd.conf.j2 and defaults/main.yml.
 
+Modifications by Sig-I/O:
+
+- Mounting of DFS directory on login, unmounting on logout
+- Use 'service' module in handlers
+- Installation of pam_mount from sig-io repositories (as EL6 packages seem to be non existant)
+
 Requirements
 ------------
 
@@ -27,6 +33,10 @@ The role uses the following variables, which you should override in your playboo
 * `adauth_access_filter` - LDAP search query to limit who can login to the server. See defaults for examples.
 * `adauth_username` - The username with join privileges in the server OU.
 * `adauth_password` - The password. You can use var_prompts in your playbook for this.
+* `adauth_fileserver`- The name of the server that hosts the DFS path to mount.
+* `adauth_homepath` - The path to the DFS mount which should be mounted on login.
+* `adauth_homemount` - The location to mount the DFS share to.
+
 
 
 Example Playbook
@@ -51,4 +61,5 @@ Author Information
 ------------------
 
 Georgi Stanojevski
+Mark Janssen <mark@sig-io.nl>
 [GitHub project page](https://github.com/glisha/ansible-adauth)
