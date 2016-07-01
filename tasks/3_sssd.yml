@@ -5,6 +5,8 @@
     - sssd
     - oddjob-mkhomedir
     - authconfig
+  tags:
+    - yum
 
 - name: Check if authconfig did a previous run
   command: "/bin/egrep '^auth.*sufficient.*pam_sss.so' /etc/pam.d/system-auth"

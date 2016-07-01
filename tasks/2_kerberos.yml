@@ -4,6 +4,8 @@
   with_items:
     - krb5-workstation
     - openldap-clients
+  tags:
+    - yum
 
 - name: Configure Kerberos integration with AD
   template: src=krb5.conf dest=/etc/krb5.conf
