@@ -1,12 +1,10 @@
+# {{ ansible_managed }}
+
 [global]
+#--authconfig--start-line--
    workgroup = {{ adauth_workgroup }}
-   client signing = yes
-   client use spnego = yes
-   kerberos method = secrets and keytab
-   log file = /var/log/samba/%m.log
    password server = {{ adauth_pdc }}
    realm = {{ adauth_realm }}
-   security = ads
 
    idmap uid = 16777216-33554431
    idmap gid = 16777216-33554431
@@ -14,16 +12,18 @@
    template shell = /bin/false
    winbind use default domain = true
    winbind offline logon = false
+#--authconfig--end-line--
 
    server string = Samba Server Version %v
-
+   client signing = yes
+   client use spnego = yes
+   kerberos method = secrets and keytab
    # logs split per machine
-   log file = /var/log/samba/log.%m
+   log file = /var/log/samba/%m.log
    # max 50KB per log file, then rotate
    max log size = 50
-
+   security = ads
    passdb backend = tdbsam
-
    load printers = yes
    cups options = raw
 
