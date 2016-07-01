@@ -10,6 +10,7 @@
 
 - name: Check if authconfig did a previous run
   command: "/bin/egrep '^auth.*sufficient.*pam_sss.so' /etc/pam.d/system-auth"
+  always_run: yes
   register: authconfig_run
   changed_when: false
   ignore_errors: true

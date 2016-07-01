@@ -22,4 +22,9 @@
   command: /usr/bin/net ads join createcomputer={{ adauth_server_ou }} -U "{{ adauth_username }}"%"{{ adauth_password }}"
   args:
     creates: /etc/krb5.keytab
+  ignore_errors: yes
 
+- name: Recreate keytab if not present (and we were already in the domain)
+  command: /usr/bin/net ads keytab create -k
+  args:
+    creates: /etc/krb5.keytab
