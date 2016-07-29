@@ -19,6 +19,6 @@
     <nfsmount>/bin/true</nfsmount>
     <nfsumount>/bin/true</nfsumount>
 
-    <volume uid="100000-4294967290" fstype="cifs" server="{{adauth_fileserver}}" path="{{adauth_homepath}}" mountpoint="{{adauth_homemount}}" options="iocharset=utf8,file_mode=0700,dir_mode=0700,nodev,nosuid,sec=krb5,cruid=%(USERUID)" />
+    <volume uid="100000-4294967290" fstype="cifs" server="{{adauth_fileserver}}" path="{{adauth_homepath}}" mountpoint="{{adauth_homemount}}" options="iocharset=utf8,file_mode=0700,dir_mode=0700,nodev,nosuid,sec=krb5,cruid=%(USERUID),forcegid=%(USERGID)" />
 
 </pam_mount>
