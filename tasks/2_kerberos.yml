@@ -4,6 +4,7 @@
   with_items:
     - krb5-workstation
     - openldap-clients
+    - pam_krb5
   tags:
     - yum
 

@@ -14,8 +14,11 @@
 
     <logout wait="5000" hup="0" term="0" kill="0" />
 
-    <mkmountpoint enable="1" remove="true" />
+    <mkmountpoint enable="1" />
 
-    <volume user="*" fstype="cifs" server="{{adauth_fileserver}}" path="{{adauth_homepath}}" mountpoint="{{adauth_homemount}}" options="iocharset=utf8,file_mode=0700,dir_mode=0700,nodev,nosuid,sec=krb5,cruid=%(USERUID)" />
+    <nfsmount>/bin/true</nfsmount>
+    <nfsumount>/bin/true</nfsumount>
+
+    <volume uid="100000-4294967290" fstype="cifs" server="{{adauth_fileserver}}" path="{{adauth_homepath}}" mountpoint="{{adauth_homemount}}" options="iocharset=utf8,file_mode=0700,dir_mode=0700,nodev,nosuid,sec=krb5,cruid=%(USERUID)" />
 
 </pam_mount>
