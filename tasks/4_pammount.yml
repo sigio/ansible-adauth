@@ -33,6 +33,15 @@
   tags:
     - pam-mount
     - system-auth
+
+- name: Enable pam_mount in /etc/pam.d/password-auth
+  lineinfile: dest=/etc/pam.d/password-auth follow=yes line="{{item.line}}" state=present insertafter="{{item.after}}"
+  with_items:
+    - { line: "auth optional pam_mount.so", after: "^auth.*requisite.*pam_succeed_if.so" }
+    - { line: "session optional pam_mount.so", after: "^session.*optional.*pam_sss.so" }
+  tags:
+    - pam-mount
+    - system-auth
     
 - name: Template pam_mount.conf.xml
   template: src="pam_mount.conf.xml.j2" dest="/etc/security/pam_mount.conf.xml" owner=root group=root mode=0600
