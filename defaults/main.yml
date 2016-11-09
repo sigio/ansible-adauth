@@ -16,4 +16,4 @@ adauth_homemount_base: "/home/windows"
 adauth_homemount: "{{adauth_homemount_base}}/%(USER)"
 #adauth_access_filter: "(&(objectClass=user)(|(memberOf=CN=OSunix,OU=UnixServers,DC=example,DC=com)(memberOf=CN=DBAunix,OU=UnixServers,DC=example,DC=com)))"
 #adauth_access_filter: "(&(objectClass=user)(|(sAMAccountName=john)(sAMAccountName=merry)))"
-
+resolv_conf_additional: ""
