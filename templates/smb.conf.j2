@@ -26,6 +26,7 @@
    passdb backend = tdbsam
    load printers = yes
    cups options = raw
+   netbios name = {{netbios_name|default(ansible_hostname)}}
 
 [homes]
     comment = Home Directories

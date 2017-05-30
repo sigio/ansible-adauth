@@ -16,7 +16,7 @@ ldap_disable_referrals = true
 ldap_force_upper_case_realm = true
 ldap_id_mapping = True
 
-ldap_sasl_authid = {{ ansible_hostname | upper }}$@{{ adauth_realm }}
+ldap_sasl_authid = {{netbios_name|default(ansible_hostname)|upper}}$@{{ adauth_realm }}
 ldap_sasl_mech = GSSAPI
 
 ldap_schema = ad
