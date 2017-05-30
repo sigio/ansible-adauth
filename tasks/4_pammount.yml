@@ -4,7 +4,7 @@
   command: warn=no rpm -qa pam_mount
   register: pam_mount_check
   ignore_errors: yes
-  always_run: yes
+  check_mode: no
   tags:
     - pam-mount
     - yum
