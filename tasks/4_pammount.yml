@@ -20,7 +20,7 @@
   with_items:
     - http://centos6.sigio.nl/x86_64/libHX-3.6-2.el6.x86_64.rpm
     - http://centos6.sigio.nl/x86_64/pam_mount-2.5-2.el6.x86_64.rpm
-  when: '"pam_mount" not in pam_mount_check.stdout and osver == 6'
+  when: '"pam_mount" not in pam_mount_check.stdout and ansible_distribution_major_version == 6'
   tags:
     - pam-mount
     - yum
@@ -32,7 +32,7 @@
     - http://centos7.sigio.nl/x86_64/libHX-3.18-3.el7.nux.x86_64.rpm
     - http://centos7.sigio.nl/x86_64/hxtools-20140703-3.el7.nux.x86_64.rpm
     - http://centos7.sigio.nl/x86_64/pam_mount-2.14-3.el7.nux.x86_64.rpm
-  when: '"pam_mount" not in pam_mount_check.stdout and osver == 7'
+  when: '"pam_mount" not in pam_mount_check.stdout and ansible_distribution_major_version == 7'
   tags:
     - pam-mount
     - yum
@@ -54,7 +54,7 @@
   tags:
     - pam-mount
     - system-auth
-    
+
 - name: Template pam_mount.conf.xml
   template: src="pam_mount.conf.xml.j2" dest="/etc/security/pam_mount.conf.xml" owner=root group=root mode=0600
   tags:
